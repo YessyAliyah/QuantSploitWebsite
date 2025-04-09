@@ -131,22 +131,62 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add styles for button loader
-const style = document.createElement('style');
-style.textContent = `
-.btn-loader {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-`;
-document.head.appendChild(style);
+// Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all modal triggers and modals
+    const modalTriggers = document.querySelectorAll('.modal-trigger');
+    const modals = document.querySelectorAll('.modal-overlay');
+    const closeButtons = document.querySelectorAll('.modal-close');
+
+    // Add click event to each trigger
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(`${modalId}-modal`);
+            
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+        });
+    });
+
+    // Add click event to close buttons
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.modal-overlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+    });
+
+    // Close modal when clicking outside content
+    modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                this.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+    });
+
+    // Add styles for button loader
+    const style = document.createElement('style');
+    style.textContent = `
+    .btn-loader {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    `;
+    document.head.appendChild(style);
+});

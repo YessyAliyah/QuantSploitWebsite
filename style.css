@@ -440,6 +440,90 @@ footer::before {
     color: var(--gold-accent);
 }
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 10, 19, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--dark-blue);
+    width: 90%;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--light-blue);
+}
+
+.modal-content h2 {
+    color: var(--gold-accent);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-body {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: inherit;
+    padding: 0;
+    margin: 0 1rem;
+}
+
+.footer-link:hover {
+    color: var(--light-blue);
+}
+
 /* Premium Loading Animation */
 .loading {
     position: fixed;
