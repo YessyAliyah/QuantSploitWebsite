@@ -173,28 +173,69 @@ header p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(18, 26, 43, 0.9), rgba(10, 14, 23, 0.9));
-    border: 2px dashed var(--light-blue);
-    color: var(--text-secondary);
+    background: linear-gradient(135deg, 
+        rgba(13, 20, 36, 0.95), 
+        rgba(5, 10, 19, 0.98));
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: var(--text-primary);
     transition: var(--transition);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .preview-placeholder:hover {
-    background: linear-gradient(135deg, rgba(18, 26, 43, 0.95), rgba(10, 14, 23, 0.95));
-    border-color: var(--accent-blue);
+    background: linear-gradient(135deg, 
+        rgba(18, 26, 43, 0.98), 
+        rgba(10, 14, 23, 0.98));
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .preview-placeholder p {
     margin: 0.5rem 0;
     text-align: center;
     max-width: 80%;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
 }
 
 .preview-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        transparent,
+        transparent,
+        transparent,
+        rgba(255, 215, 0, 0.1),
+        transparent,
+        transparent,
+        transparent
+    );
+    transform: rotate(30deg);
+    animation: shine 6s infinite;
+    z-index: 1;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) rotate(30deg); }
+}
+
+.preview-placeholder::after {
     content: '🎬';
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     animation: pulse 2s infinite ease-in-out;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+    z-index: 2;
 }
 
 .download-section {
@@ -219,19 +260,24 @@ header p {
 }
 
 .download-btn {
-    background: linear-gradient(135deg, var(--light-blue), var(--accent-blue));
-    color: var(--dark-bg);
+    background: linear-gradient(135deg, 
+        var(--light-blue), 
+        var(--accent-blue),
+        #0d47a1);
+    color: white;
     border: none;
-    padding: 1.2rem 2.5rem;
-    font-size: 1.2rem;
+    padding: 1.25rem 2.75rem;
+    font-size: 1.25rem;
     border-radius: 50px;
     cursor: pointer;
     transition: var(--transition);
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+    box-shadow: 0 8px 32px rgba(21, 101, 192, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .download-btn::before {
@@ -241,30 +287,75 @@ header p {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    transition: 0.6s;
+}
+
+.download-btn::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 55px;
+    background: linear-gradient(
+        135deg, 
+        rgba(100, 181, 246, 0.4), 
+        rgba(255, 215, 0, 0.2),
+        transparent
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
 }
 
 .download-btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(79, 195, 247, 0.5);
+    box-shadow: 0 12px 40px rgba(21, 101, 192, 0.6);
+    letter-spacing: 1px;
 }
 
 .download-btn:hover::before {
     left: 100%;
 }
 
+.download-btn:hover::after {
+    opacity: 1;
+}
+
 .download-btn:active {
     transform: translateY(0);
+    box-shadow: 0 5px 20px rgba(21, 101, 192, 0.5);
+}
+
+.download-btn .btn-icon {
+    margin-left: 8px;
+    transition: var(--transition);
+}
+
+.download-btn:hover .btn-icon {
+    transform: translateX(3px);
 }
 
 footer {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 6rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     position: relative;
-    padding-top: 2rem;
+    padding: 3rem 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(13, 20, 36, 0.3),
+        transparent
+    );
 }
 
 footer::before {
@@ -273,9 +364,80 @@ footer::before {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: 80%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--light-blue), transparent);
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(100, 181, 246, 0.4), 
+        rgba(255, 215, 0, 0.3),
+        rgba(100, 181, 246, 0.4),
+        transparent
+    );
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-link:hover {
+    color: var(--light-blue);
+}
+
+.footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--light-blue);
+    transition: var(--transition);
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.footer-copyright {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.footer-premium-badge {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 215, 0, 0.1),
+        rgba(100, 181, 246, 0.1)
+    );
+    border-radius: 50px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold-accent);
 }
 
 /* Premium Loading Animation */
