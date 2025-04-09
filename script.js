@@ -170,6 +170,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Whitelist verification functionality
+    const downloadTrigger = document.getElementById('download-trigger');
+    const whitelistModal = document.getElementById('whitelist-modal');
+    const whitelistChecking = document.getElementById('whitelist-checking');
+    const whitelistSuccess = document.getElementById('whitelist-success');
+    const whitelistFail = document.getElementById('whitelist-fail');
+    const progressBar = document.querySelector('.progress-bar');
+
+    if (downloadTrigger) {
+        downloadTrigger.addEventListener('click', function() {
+            // Show whitelist verification modal
+            whitelistModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Show checking state
+            whitelistChecking.style.display = 'block';
+            whitelistSuccess.style.display = 'none';
+            whitelistFail.style.display = 'none';
+            
+            // Simulate whitelist check (replace with actual API call)
+            setTimeout(() => {
+                // For demo purposes, randomly pass/fail
+                const isWhitelisted = Math.random() > 0.5;
+                
+                whitelistChecking.style.display = 'none';
+                
+                if (isWhitelisted) {
+                    // Show success state
+                    whitelistSuccess.style.display = 'block';
+                    
+                    // Simulate download progress
+                    let progress = 0;
+                    const progressInterval = setInterval(() => {
+                        progress += 5;
+                        progressBar.style.width = `${progress}%`;
+                        
+                        if (progress >= 100) {
+                            clearInterval(progressInterval);
+                            setTimeout(() => {
+                                whitelistModal.classList.remove('active');
+                                document.body.style.overflow = '';
+                                progressBar.style.width = '0';
+                                
+                                // Replace with actual download
+                                alert('Download complete!');
+                            }, 500);
+                        }
+                    }, 100);
+                } else {
+                    // Show fail state
+                    whitelistFail.style.display = 'block';
+                }
+            }, 2000);
+        });
+    }
+
     // Add styles for button loader
     const style = document.createElement('style');
     style.textContent = `

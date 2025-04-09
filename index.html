@@ -38,8 +38,40 @@
             
             <section class="download-section">
                 <h2>Download Now</h2>
-                <button class="download-btn">Download Software</button>
+                <button class="download-btn" id="download-trigger">Download Software</button>
             </section>
+
+            <!-- Whitelist Verification Modal -->
+            <div class="modal-overlay" id="whitelist-modal">
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <h2>Whitelist Verification</h2>
+                    <div class="modal-body">
+                        <div id="whitelist-success" style="display: none;">
+                            <h3>Verification Successful!</h3>
+                            <p>Your download will begin shortly.</p>
+                            <div class="download-progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <div id="whitelist-fail" style="display: none;">
+                            <h3>Whitelist Required</h3>
+                            <p>To download QuantSploit, you must be whitelisted in our Discord server.</p>
+                            <a href="https://discord.gg/UgqNGabspN" class="discord-btn" target="_blank">
+                                Join Our Discord
+                            </a>
+                            <p>After joining, contact an admin for whitelist approval.</p>
+                        </div>
+                        <div id="whitelist-checking">
+                            <h3>Verifying Whitelist Status</h3>
+                            <div class="verification-loader">
+                                <div class="loader-spinner"></div>
+                                <p>Checking Discord whitelist...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         
         <footer>
@@ -135,7 +167,7 @@
                     <p>Visit our <a href="https://discord.gg/UgqNGabspN" target="_blank">Discord server</a> for documentation, tutorials, and FAQs.</p>
                     
                     <h4>Emergency Support</h4>
-                    <p>For critical issues, call our emergency line: +1 (555) 987-6543</p>
+                    <p>For critical issues, email us at QuantSploitStudios@gmail.com</p>
                 </div>
             </div>
         </div>
