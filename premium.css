@@ -1,0 +1,93 @@
+/* Premium Gold Effects */
+.premium-glow {
+    position: relative;
+}
+
+.premium-glow::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffd700, #f5d07a, #ffd700);
+    background-size: 200% 200%;
+    z-index: -1;
+    border-radius: inherit;
+    animation: premium-glow 3s ease infinite;
+    opacity: 0.7;
+    filter: blur(5px);
+}
+
+@keyframes premium-glow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Enhanced Particle Effects */
+.particle.premium {
+    background: radial-gradient(circle, #ffd700, transparent) !important;
+    box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.7) !important;
+    animation: particle-pulse 2s ease infinite !important;
+}
+
+@keyframes particle-pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Luxury Modal Enhancements */
+.modal-content.premium {
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-content.premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd700, #f5d07a, #ffd700);
+    animation: premium-border 3s linear infinite;
+}
+
+@keyframes premium-border {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Premium Loading Effects */
+.loading-spinner.premium {
+    border-top-color: #ffd700 !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7) !important;
+}
+
+.loading.premium p {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+/* Premium Footer Badge */
+.footer-premium-badge {
+    position: relative;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ffd700, #f5d07a);
+    color: #000;
+    font-weight: 700;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    animation: pulse-gold 2s infinite;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+@keyframes pulse-gold {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}

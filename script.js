@@ -13,29 +13,25 @@ document.addEventListener('DOMContentLoaded', function() {
         'Ready!'
     ];
     
+    const progressBar = loadingScreen.querySelector('.loading div[style*="width: 0%"]');
     let progress = 0;
     const loadingInterval = setInterval(() => {
         progress += Math.random() * 20;
+        progressBar.style.width = `${Math.min(progress, 100)}%`;
         if (progress >= 100) {
             clearInterval(loadingInterval);
             loadingText.textContent = 'Welcome to QuantSploit';
             
-            // Add gold welcome effect
-            const welcomeEffect = document.createElement('div');
-            welcomeEffect.className = 'welcome-effect';
-            welcomeEffect.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: radial-gradient(circle at center, 
-                    rgba(255, 215, 0, 0.2) 0%, 
-                    transparent 70%);
-                opacity: 0;
-                animation: fadeIn 1s ease-out forwards;
+            // Add confetti celebration effect
+            const confetti = document.createElement('div');
+            confetti.className = 'absolute inset-0 z-50 pointer-events-none';
+            confetti.innerHTML = `
+                <div class="absolute w-2 h-2 bg-premium-gold rounded-full animate-float" style="left: 20%"></div>
+                <div class="absolute w-2 h-2 bg-premium-blue rounded-full animate-float animation-delay-300" style="left: 40%"></div>
+                <div class="absolute w-2 h-2 bg-premium-gold rounded-full animate-float animation-delay-600" style="left: 60%"></div>
+                <div class="absolute w-2 h-2 bg-premium-blue rounded-full animate-float animation-delay-900" style="left: 80%"></div>
             `;
-            loadingScreen.appendChild(welcomeEffect);
+            loadingScreen.appendChild(confetti);
             
             // Hide loading screen with delay
             setTimeout(() => {
@@ -200,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Show success state
                     whitelistSuccess.style.display = 'block';
                     
-                    // Simulate download progress
+                    // Enhanced download progress with Tailwind
                     let progress = 0;
                     const progressInterval = setInterval(() => {
                         progress += 5;
@@ -213,14 +209,36 @@ document.addEventListener('DOMContentLoaded', function() {
                                 document.body.style.overflow = '';
                                 progressBar.style.width = '0';
                                 
-                                // Replace with actual download
-                                alert('Download complete!');
+                                // Start actual download
+                                window.location.href = 'assets/software-package.zip';
                             }, 500);
                         }
                     }, 100);
                 } else {
-                    // Show fail state
+                    // Show fail state with retry button
                     whitelistFail.style.display = 'block';
+                    const retryBtn = document.createElement('button');
+                    retryBtn.className = 'mt-4 px-4 py-2 bg-premium-blue hover:bg-premium-gold text-white rounded-lg transition-colors';
+                    retryBtn.textContent = 'Retry Verification';
+                    retryBtn.addEventListener('click', () => {
+                        whitelistFail.style.display = 'none';
+                        whitelistChecking.style.display = 'block';
+                        
+                        // Simulate retry verification
+                        setTimeout(() => {
+                            whitelistChecking.style.display = 'none';
+                            if (Math.random() > 0.7) { // 30% chance of success on retry
+                                whitelistSuccess.style.display = 'block';
+                                // Start download progress...
+                            } else {
+                                whitelistFail.style.display = 'block';
+                            }
+                        }, 1500);
+                    });
+                    
+                    if (!whitelistFail.querySelector('button')) {
+                        whitelistFail.appendChild(retryBtn);
+                    }
                 }
             }, 2000);
         });
